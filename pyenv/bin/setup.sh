@@ -13,4 +13,4 @@ VERSION=`pyenv install -l | grep miniconda | tail -n 1 | tr -d ' '`
 pyenv install $VERSION
 pyenv rehash
 pyenv global $VERSION
-conda update -y conda python
+conda update -y conda
