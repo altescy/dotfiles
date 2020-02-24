@@ -1,0 +1,122 @@
+###  APPEARANCE
+[[plugins]]
+repo = 'kien/rainbow_parentheses.vim'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 0
+    let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#buffer_idx_mode = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+    let g:airline#extensions#whitespace#mixed_indent_algo = 1
+    let g:airline#extensions#ale#enabled = 1
+    nmap <S-Tab> <Plug>AirlineSelectPrevTab
+    nmap <Tab> <Plug>AirlineSelectNextTab
+'''
+
+[[plugins]]
+repo = 'tomasiser/vim-code-dark'
+hook_add = '''
+colorscheme codedark
+let g:airline_theme = 'codedark'
+'''
+
+
+### UTILITIES
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+if executable('gopls')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['pls']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+    "autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+    "autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+    "autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+  augroup END
+endif
+if executable('pyls')
+        au User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->['pyls']},
+                \ 'whitelist': ['python'],
+        \ })
+endif
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_enabled = 0
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    let g:ale_sign_column_always = 1
+    let g:ale_fix_on_save = 1
+    let g:ale_completion_enabled = 1
+    let g:ale_sign_error = 'X'
+    let g:ale_sign_warning = '!'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_linters = {
+    \   'python': ['pylint', 'mypy'],
+    \   'rust': ['rls'],
+    \}
+    let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'go': ['gofmt'],
+    \   'rust': ['rustfmt'],
+    \}
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+hook_add = '''
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = 'map <C-n> :NERDTreeToggle<CR>'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
