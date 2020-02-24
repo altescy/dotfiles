@@ -22,4 +22,5 @@ jobs:
         make brew_bundle
     - name: Setup applications
       run: |
+        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         make
