@@ -7,4 +7,4 @@ ln -s `pwd`/nvim/conf.d/dein_lazy.toml $HOME/.config/nvim/dein_lazy.toml
 
 pip install -U neovim
 
-nvim -u $HOME/.config/nvim/init.vim
+nvim -u $HOME/.config/nvim/init.vim +qall
