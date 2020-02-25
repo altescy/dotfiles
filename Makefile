@@ -7,7 +7,7 @@ all: clean setup
 setup: zsh_setup tmux_setup pyenv_setup nvim_setup
 
 build_brew:
-	$(PWD)/brew/bin/setup.sh
+	$(PWD)/brew/bin/build.sh
 
 brew_install:
 	brew install neovim tmux zsh
