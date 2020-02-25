@@ -19,7 +19,7 @@ jobs:
       run: |
         make build_brew
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        make brew_bundle
+        make brew_install
     - name: Setup applications
       run: |
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
