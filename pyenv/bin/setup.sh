@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 ### pyenv
 git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -14,3 +13,4 @@ pyenv install $VERSION
 pyenv rehash
 pyenv global $VERSION
 conda update -y conda
+conda init --all
