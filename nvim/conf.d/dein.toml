@@ -87,6 +87,7 @@ hook_add = '''
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'go': ['gofmt'],
+    \   'python': ['yapf'],
     \   'rust': ['rustfmt'],
     \}
 '''
