@@ -67,6 +67,10 @@ if [ ! -n "$TMUX" ]; then
     exit
 fi
 
+if is_exists 'tmux'; then
+    alias tmux-changekey='tmux set-option -ag prefix C-b'
+    alias tmux-revertkey='tmux set-option -ag prefix C-a'
+fi
 
 ### pyenv
 if [ -d $HOME/.pyenv ]; then
@@ -98,3 +102,5 @@ case ${OSTYPE} in
         fi
     ;;
 esac
+alias open=xdg-open
+alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
