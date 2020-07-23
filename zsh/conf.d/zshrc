@@ -82,6 +82,12 @@ if [ -d $HOME/.goenv ]; then
     eval "$(goenv init -)"
 fi
 
+### fzf
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+    export FZF_DEFAULT_OPTS='--height 50% --reverse --border'
+fi
+
 ### utilities
 case ${OSTYPE} in
     linux*)
