@@ -1,10 +1,10 @@
-.PHONY: all setup build_brew brew_install clean zsh_setup tmux_setup fzf_setup nvim_setup
+.PHONY: all setup build_brew brew_install clean zsh_setup tmux_setup fzf_setup poetry_setup nvim_setup
 
 PWD    := $(shell pwd)
 
 all: clean setup
 
-setup: zsh_setup tmux_setup editorconfig_setup fzf_setup nvim_setup
+setup: zsh_setup tmux_setup editorconfig_setup fzf_setup poetry_setup nvim_setup
 
 build_brew:
 	$(PWD)/brew/bin/build.sh
@@ -30,6 +30,9 @@ editorconfig_setup:
 
 fzf_setup:
 	$(PWD)/fzf/bin/setup.sh
+
+poetry_setup:
+	$(PWD)/poetry/bin/setup.sh
 
 nvim_setup:
 	$(PWD)/nvim/bin/setup.sh
