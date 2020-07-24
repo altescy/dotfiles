@@ -72,18 +72,9 @@ if is_exists 'tmux'; then
     alias tmux-revertkey='tmux set-option -ag prefix C-a'
 fi
 
-### pyenv
-if [ -d $HOME/.pyenv ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
-
-### goenv
-if [ -d $HOME/.goenv ]; then
-    export GOENV_ROOT=$HOME/.goenv
-    export PATH=$GOENV_ROOT/bin:$PATH
-    eval "$(goenv init -)"
+### anyenv
+if is_exists anyenv; then
+    eval "$(anyenv init -)"
 fi
 
 ### fzf
