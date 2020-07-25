@@ -4,7 +4,7 @@ DOCKER_USERNAME       = user
 DOCKER_PASSWORD       = password
 DOCKER_IMAGE_NAME     = dotfiles
 DOCKER_CONTAINER_NAME = dotfiles
-DOCKERFILE_PATH       = $(PWD)/docker/Dockerfile
+DOCKERFILE_PATH       = $(PWD)/Dockerfile
 
 .PHONY: all brew \
         apps anyenv_app fzf_app nvim_app poetry_app tmux_app zsh_app \
