@@ -22,3 +22,5 @@ fi
 
 python --version
 pip --version
+
+pip install python-language-server pylint mypy yapf
