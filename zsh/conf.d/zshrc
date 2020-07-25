@@ -90,8 +90,8 @@ case ${OSTYPE} in
         if [ -n `type "xsel" > /dev/null 2>&1` ]; then
             alias pbcopy='xsel -i --clipboard'
             alias pbpaste='xsel -o --clipboard'
+            alias open=xdg-open
+            alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
         fi
     ;;
 esac
-alias open=xdg-open
-alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
