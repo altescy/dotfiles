@@ -6,5 +6,3 @@ fi
 if !(type "poetry" > /dev/null 2>&1); then
     pip install poetry
 fi
-
-poetry --version
