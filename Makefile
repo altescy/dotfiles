@@ -8,10 +8,10 @@ DOCKERFILE_PATH       = $(PWD)/docker/Dockerfile
 
 .PHONY: all brew \
         apps anyenv_app fzf_app nvim_app poetry_app tmux_app zsh_app \
-	    languages clang golang node python rust \
-	    configs editorconfig nvim poetry tmux zsh \
-	    docker docker_attach docker_build docker_run docker_stop \
-	    clean editorconfig_clean nvim_clean tmux_clean zsh_clean
+        languages clang golang node python rust \
+        configs editorconfig nvim poetry tmux zsh \
+        docker docker_attach docker_build docker_run docker_stop \
+        clean editorconfig_clean nvim_clean tmux_clean zsh_clean
 
 all: clean apps configs
 
