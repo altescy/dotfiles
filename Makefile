@@ -1,39 +1,114 @@
-.PHONY: all setup build_brew brew_install clean zsh_setup tmux_setup poetry_setup nvim_setup
+.PHONY: all brew \
+		apps anyenv_app fzf_app nvim_app poetry_app tmux_app zsh_app \
+		languages node python \
+		configs editorconfig nvim poetry tmux zsh \
+		docker docker_attach docker_build docker_run docker_stop \
+		clean editorconfig_clean nvim_clean tmux_clean zsh_clean
 
-PWD    := $(shell pwd)
+PWD                   = $(shell pwd)
+DOCKER                = docker
+DOCKER_IMAGE_NAME     = dotfiles
+DOCKER_CONTAINER_NAME = dotfiles
+DOCKERFILE_PATH       = $(PWD)/docker/Dockerfile
 
-all: clean env_setup config_setup
+all: clean apps configs
 
-brew_setup:
-	$(PWD)/bin/brew_setup.sh
+brew:
+	$(PWD)/bin/brew_install.sh
 
-app_setup:
-	brew install anyenv neovim poetry tmux zsh
+#
+#  APPS
+#
 
-env_setup:
-	$(PWD)/bin/anyenv_setup.sh
-	$(PWD)/bin/nodenv_setup.sh
-	$(PWD)/bin/pyenv_setup.sh
+apps: anyenv_app fzf_app nvim_app tmux_app zsh_app
 
-config_setup: zsh_setup tmux_setup editorconfig_setup poetry_setup nvim_setup
+anyenv_app:
+	$(PWD)/bin/anyenv_install.sh
 
-zsh_setup:
-	$(PWD)/zsh/bin/setup.sh
+fzf_app:
+	$(PWD)/bin/fzf_install.sh
 
-tmux_setup:
-	$(PWD)/tmux/bin/setup.sh
+nvim_app:
+	$(PWD)/nvim/bin/install.sh
 
-editorconfig_setup:
+poetry_app: python
+	$(PWD)/poetry/bin/install.sh
+
+tmux_app:
+	$(PWD)/tmux/bin/install.sh
+
+zsh_app:
+	$(PWD)/zsh/bin/install.sh
+
+#
+#  LANGUAGES
+#
+
+languages: node python
+
+node:
+	$(PWD)/bin/node_install.sh
+
+python:
+	$(PWD)/bin/python_install.sh
+
+#
+#  CONFIGS
+#
+
+configs: editorconfig nvim poetry tmux zsh
+
+editorconfig:
 	$(PWD)/editorconfig/bin/setup.sh
 
-poetry_setup:
-	$(PWD)/poetry/bin/setup.sh
-
-nvim_setup:
+nvim: node nvim_app
 	$(PWD)/nvim/bin/setup.sh
 
-clean:
-	rm -rf $(HOME)/.zshrc
-	rm -rf $(HOME)/.tmux.conf
+poetry: poetry_app
+	$(PWD)/poetry/bin/setup.sh
+
+tmux: tmux_app
+	$(PWD)/tmux/bin/setup.sh
+
+zsh: zsh_app
+	$(PWD)/zsh/bin/setup.sh
+
+#
+#  DOCKER
+#
+docker: docker_build docker_run
+
+docker_build:
+	$(DOCKER) build -t $(DOCKER_IMAGE_NAME) -f $(DOCKERFILE_PATH) $(PWD)
+
+docker_run: docker_build
+	$(DOCKER) run -it --name $(DOCKER_CONTAINER_NAME) $(DOCKER_IMAGE_NAME)
+
+docker_attach:
+	$(DOCKER) attach $(DOCKER_CONTAINER_NAME)
+
+docker_stop:
+	$(DOCKER) stop $(DOCKER_CONTAINER_NAME)
+
+docker_rm: docker_stop
+	$(DOCKER) rm $(DOCKER_CONTAINER_NAME)
+
+#
+#  CLEAN
+#
+
+clean: editorconfig_clean nvim_clean tmux_clean zsh_clean
+
+editorconfig_clean:
 	rm -rf $(HOME)/.editorconfig
+
+nvim_clean:
 	rm -rf $(HOME)/.config/nvim
+	rm -rf $(HOME)/.config/coc
+	rm -rf $(HOME)/.cache/dein
+
+tmux_clean:
+	rm -rf $(HOME)/.tmux.conf
+
+zsh_clean:
+	rm -rf $(HOME)/.zshrc

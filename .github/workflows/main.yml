@@ -17,10 +17,9 @@ jobs:
         sudo update-locale
     - name: Install linuxbrew
       run: |
-        make brew_setup
+        make brew
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     - name: Setup applications
       run: |
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        make app_setup
         make
