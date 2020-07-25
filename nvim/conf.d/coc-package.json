@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "coc-clangd": "latest",
+    "coc-go": "latest",
+    "coc-json": "latest",
+    "coc-pyls": "latest",
+    "coc-python": "latest",
+    "coc-rls": "latest",
+    "coc-yaml": "latest"
+  }
+}
