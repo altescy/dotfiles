@@ -17,4 +17,4 @@ fi
 mkdir -p $HOME/.config/coc/extensions
 cp `pwd`/nvim/conf.d/coc-package.json $HOME/.config/coc/extensions/package.json
 cd $HOME/.config/coc/extensions
-npm install coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+npm install --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
