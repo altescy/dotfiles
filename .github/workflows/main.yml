@@ -22,4 +22,5 @@ jobs:
     - name: Setup applications
       run: |
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        make languages
         make

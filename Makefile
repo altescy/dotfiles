@@ -44,13 +44,22 @@ zsh_app:
 #  LANGUAGES
 #
 
-languages: node python
+languages: clang golang node python rust
+
+clang:
+	$(PWD)/bin/clang_install.sh
+
+golang:
+	$(PWD)/bin/golang_install.sh
 
 node:
 	$(PWD)/bin/node_install.sh
 
 python:
 	$(PWD)/bin/python_install.sh
+
+rust:
+	$(PWD)/bin/rust_install.sh
 
 #
 #  CONFIGS
