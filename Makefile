@@ -2,15 +2,15 @@
 
 PWD    := $(shell pwd)
 
-all: clean setup
+all: clean env_setup app_setup
 
-setup: zsh_setup tmux_setup editorconfig_setup poetry_setup nvim_setup
+env_setup:
+	$(PWD)/bin/brew_setup.sh
+	brew install anyenv neovim poetry tmux zsh
+	$(PWD)/bin/anyenv_setup.sh
+	$(PWD)/bin/nodenv_setup.sh
 
-build_brew:
-	$(PWD)/brew/bin/build.sh
-
-brew_install:
-	brew install neovim tmux zsh
+app_setup: zsh_setup tmux_setup editorconfig_setup poetry_setup nvim_setup
 
 clean:
 	rm -rf $(HOME)/.zshrc
