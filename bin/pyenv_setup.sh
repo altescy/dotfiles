@@ -1,7 +1,9 @@
 #!/bin/bash
 
-anyenv install pyenv
-eval "$(anyenv init -)"
+if !(type "pyenv" > /dev/null 2>&1); then
+    anyenv install pyenv
+    eval "$(anyenv init -)"
+fi
 
 # Install latest conda
 PYTHON_VERSION="miniconda3-latest"

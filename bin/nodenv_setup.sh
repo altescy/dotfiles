@@ -1,7 +1,9 @@
 #!/bin/bash
 
-anyenv install nodenv
-eval "$(anyenv init -)"
+if !(type "nodenv" > /dev/null 2>&1); then
+    anyenv install nodenv
+    eval "$(anyenv init -)"
+fi
 
 # Install latest node
 NODE_VERSION=`nodenv install -l | grep -E '^[0-9]+\.[0-9]+\.[0-9]$' | tail -n 1`
