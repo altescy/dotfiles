@@ -11,8 +11,8 @@ reload() {
 reload()
 
 if !(type "go" > /dev/null 2>&1); then
-    if (type "anyenv" > /dev/null 2>&1); then
-        if !(type "goenv" > /dev/null 2>&1); then
+    if !(type "goenv" > /dev/null 2>&1); then
+        if (type "anyenv" > /dev/null 2>&1); then
             anyenv install goenv
             eval "$(anyenv init -)"
         fi
