@@ -8,15 +8,22 @@ dotfiles
 
 ### Install
 
-Install `brew` and applications if you need.
+Install `brew` via following command.
 
 ```
-$ make build_brew
-$ make brew_install    # install neovim, tmux and zsh
+$ make brew
 ```
 
-Set up all dotfiles via following commands:
+Install applications and set up dotfiles via:
 
 ```
 $ make
+```
+
+### Docker
+
+You can use this environment on Docker.
+
+```
+$ make docker
 ```
