@@ -25,5 +25,5 @@ $ make
 You can use this environment on Docker.
 
 ```
-$ make docker
+$ make docker DOCKER_USERNAME=username DOCKER_PASSWORD=password
 ```
