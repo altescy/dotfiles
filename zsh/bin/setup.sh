@@ -10,6 +10,3 @@ fi
 
 SOURCE_SCRIPT="source `pwd`/zsh/conf.d/zshrc"
 ! grep "${SOURCE_SCRIPT}" ~/.zshrc && echo "${SOURCE_SCRIPT}" >> ~/.zshrc
-
-test -r ~/.bash_profile && cat `pwd`/zsh/conf.d/profile >> $HOME/.bash_profile
-cat `pwd`/zsh/conf.d/profile >> $HOME/.profile
