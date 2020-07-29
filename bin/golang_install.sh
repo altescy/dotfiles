@@ -8,7 +8,7 @@ reload() {
     fi
 }
 
-reload()
+reload
 
 if !(type "go" > /dev/null 2>&1); then
     if !(type "goenv" > /dev/null 2>&1); then
