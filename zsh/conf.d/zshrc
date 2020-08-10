@@ -106,11 +106,14 @@ fi
 ### utilities
 case ${OSTYPE} in
     linux*)
-        # clipboard
-        if [ -n `type "xsel" > /dev/null 2>&1` ]; then
+        if is_exists xsel; then
             alias pbcopy='xsel -i --clipboard'
             alias pbpaste='xsel -o --clipboard'
+        fi
+        if is_exists xdg-open; then
             alias open=xdg-open
+        fi
+        if is_exists gs; then
             alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
         fi
     ;;
