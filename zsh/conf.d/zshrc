@@ -40,7 +40,7 @@ function tmux_automatically_attach_session()
                 return 1
             fi
 
-            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qvE '\(attached\)$'; then
                 # detached session exists
                 tmux list-sessions
                 echo -n "Tmux: attach? (y/N/num) "
