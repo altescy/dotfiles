@@ -40,7 +40,7 @@ function tmux_automatically_attach_session()
                 return 1
             fi
 
-            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qvE '\(attached\)$'; then
                 # detached session exists
                 tmux list-sessions
                 echo -n "Tmux: attach? (y/N/num) "
@@ -106,11 +106,14 @@ fi
 ### utilities
 case ${OSTYPE} in
     linux*)
-        # clipboard
-        if [ -n `type "xsel" > /dev/null 2>&1` ]; then
+        if is_exists xsel; then
             alias pbcopy='xsel -i --clipboard'
             alias pbpaste='xsel -o --clipboard'
+        fi
+        if is_exists xdg-open; then
             alias open=xdg-open
+        fi
+        if is_exists gs; then
             alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
         fi
     ;;
