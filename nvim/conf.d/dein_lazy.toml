@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'google/vim-jsonnet'
+on_ft = ['jsonnet']

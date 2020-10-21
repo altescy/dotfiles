@@ -67,6 +67,3 @@ repo = 'Townk/vim-autoclose'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
-
-[[plugins]]
-repo = 'google/vim-jsonnet'
