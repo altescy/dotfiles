@@ -3,11 +3,13 @@
     "coc-clangd": "latest",
     "coc-docker": "latest",
     "coc-go": "latest",
+    "coc-html": "latest",
     "coc-json": "latest",
     "coc-pyls": "latest",
     "coc-python": "latest",
     "coc-rls": "latest",
     "coc-sh": "latest",
-    "coc-yaml": "latest"
+    "coc-yaml": "latest",
+    "coc-xml": "latest"
   }
 }

@@ -14,7 +14,10 @@ indent_size = 2
 [*.{js,ts,vue}]
 indent_size = 2
 
-[*.{json,jsonnet,yml}]
+[*.{html,xml}]
+indent_size = 2
+
+[*.{json,jsonnet,yml,yaml}]
 indent_size = 2
 
 [*.rb]
