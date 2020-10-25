@@ -4,6 +4,8 @@ dotfiles
 [![Actions Status](https://github.com/altescy/dotfiles/workflows/build/badge.svg)](https://github.com/altescy/dotfiles)
 [![Supported Platform](https://img.shields.io/badge/platform-linux%20%7C%20osx-red)](https://github.com/altescy/dotfiles)
 
+![Neovim screenshot](https://user-images.githubusercontent.com/16734471/97113168-ddf84500-172b-11eb-93fb-374b76574023.png)
+
 
 
 ### Install
