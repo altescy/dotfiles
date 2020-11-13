@@ -87,6 +87,12 @@ if is_exists starship; then
     eval "$(starship init zsh)"
 fi
 
+### git
+alias g=git
+if is_exists hub; then
+    eval "$(hub alias -s)"
+fi
+
 ### anyenv
 if is_exists anyenv; then
     eval "$(anyenv init -)"
