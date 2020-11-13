@@ -7,11 +7,11 @@ DOCKER_CONTAINER_NAME = dotfiles
 DOCKERFILE_PATH       = $(PWD)/Dockerfile
 
 .PHONY: all brew \
-        apps anyenv_app fzf_app nvim_app poetry_app tmux_app zsh_app \
+        apps anyenv_app fzf_app git_app nvim_app poetry_app tmux_app zsh_app \
         languages clang golang node python rust \
-        configs editorconfig nvim poetry tmux zsh \
+        configs editorconfig git nvim poetry tmux zsh \
         docker docker_attach docker_build docker_run docker_stop \
-        clean editorconfig_clean nvim_clean tmux_clean zsh_clean
+        clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
 all: clean apps configs
 
@@ -29,6 +29,9 @@ anyenv_app:
 
 fzf_app:
 	$(PWD)/bin/fzf_install.sh
+
+git_app:
+	$(PWD)/git/bin/install.sh
 
 nvim_app:
 	$(PWD)/nvim/bin/install.sh
@@ -72,6 +75,9 @@ configs: editorconfig nvim poetry tmux zsh
 editorconfig:
 	$(PWD)/editorconfig/bin/setup.sh
 
+git:
+	$(PWD)/git/bin/setup.sh
+
 nvim: node nvim_app
 	$(PWD)/nvim/bin/setup.sh
 
@@ -109,10 +115,13 @@ docker_rm: docker_stop
 #  CLEAN
 #
 
-clean: editorconfig_clean nvim_clean tmux_clean zsh_clean
+clean: editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
 editorconfig_clean:
 	rm -rf $(HOME)/.editorconfig
+
+git_clean:
+	rm -rf $(HOME)/.gitconfig
 
 nvim_clean:
 	rm -rf $(HOME)/.config/nvim
