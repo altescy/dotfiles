@@ -22,7 +22,7 @@ brew:
 #  APPS
 #
 
-apps: anyenv_app fzf_app nvim_app tmux_app zsh_app
+apps: git_app anyenv_app fzf_app nvim_app tmux_app zsh_app
 
 anyenv_app:
 	$(PWD)/bin/anyenv_install.sh
@@ -70,12 +70,12 @@ rust:
 #  CONFIGS
 #
 
-configs: editorconfig nvim poetry tmux zsh
+configs: git editorconfig nvim poetry tmux zsh
 
 editorconfig:
 	$(PWD)/editorconfig/bin/setup.sh
 
-git:
+git: git_app
 	$(PWD)/git/bin/setup.sh
 
 nvim: node nvim_app
