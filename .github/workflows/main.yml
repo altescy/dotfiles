@@ -22,4 +22,4 @@ jobs:
     - name: Setup applications
       run: |
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        make anyenv_app languages apps configs
+        make languages apps configs

@@ -57,10 +57,10 @@ clang:
 golang:
 	$(PWD)/bin/golang_install.sh
 
-node:
+node: anyenv_app
 	$(PWD)/bin/node_install.sh
 
-python:
+python: anyenv_app
 	$(PWD)/bin/python_install.sh
 
 rust:
