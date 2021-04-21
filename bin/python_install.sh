@@ -33,4 +33,4 @@ fi
 python --version
 pip --version
 
-pip install python-language-server flake8 mypy black
+pip install python-language-server flake8 mypy black isort
