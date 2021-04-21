@@ -65,12 +65,12 @@ hook_add = '''
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
     let g:ale_linters = {
     \   'go': ['golint'],
-    \   'python': ['pylint', 'mypy'],
+    \   'python': ['flake8', 'mypy'],
     \}
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'go': ['goimports', 'gofmt'],
-    \   'python': ['yapf'],
+    \   'python': ['black'],
     \   'rust': ['rustfmt'],
     \}
 '''
