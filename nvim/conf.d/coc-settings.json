@@ -1,3 +1,5 @@
 {
-  "python.venvFolders": [".venv"]
+  "python.venvPath": ".venv",
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true
 }
