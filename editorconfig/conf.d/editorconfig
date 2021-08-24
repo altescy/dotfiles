@@ -17,13 +17,19 @@ indent_size = 2
 [*.{html,xml}]
 indent_size = 2
 
-[*.{json,jsonnet,yml,yaml}]
+[*.{json,jsonnet,libsonnet,yml,yaml}]
 indent_size = 2
 
 [*.rb]
 indent_size = 2
 
 [*.go]
+indent_style = tab
+
+[*.haml]
+indent_size = 2
+
+[*.tsv]
 indent_style = tab
 
 [Makefile]
