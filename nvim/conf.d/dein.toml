@@ -16,14 +16,13 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'ghifarit53/tokyonight-vim'
+repo = 'arcticicestudio/nord-vim'
 hook_add = '''
-set termguicolors
-
-let g:tokyonight_style = 'storm' " available: night, storm
-let g:tokyonight_enable_italic = 1
-
-colorscheme tokyonight
+    set termguicolors
+    set background=dark
+    colorscheme nord
+    hi clear SpellBad
+    hi SpellBad cterm=underline
 '''
 
 [[plugins]]
