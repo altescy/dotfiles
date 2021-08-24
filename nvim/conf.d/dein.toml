@@ -21,8 +21,6 @@ hook_add = '''
     set termguicolors
     set background=dark
     colorscheme nord
-    hi clear SpellBad
-    hi SpellBad cterm=underline
 '''
 
 [[plugins]]
