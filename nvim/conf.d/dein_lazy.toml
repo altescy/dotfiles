@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'google/vim-jsonnet'
-on_ft = ['jsonnet']
+on_ft = ['jsonnet', 'libsonnet']
 
 [[plugins]]
 repo = 'arrufat/vala.vim'
