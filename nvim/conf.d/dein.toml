@@ -86,3 +86,9 @@ repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+hook_add = '''
+    let g:goyo_width = 119
+'''
