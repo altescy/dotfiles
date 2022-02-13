@@ -5,7 +5,7 @@ repo = 'kien/rainbow_parentheses.vim'
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_add = '''
-    let g:airline_powerline_fonts = 1
+    let g:airline_powerline_fonts = 0
     let g:airline#extensions#tabline#enabled = 1
     " let g:airline#extensions#tabline#buffer_idx_mode = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -16,11 +16,31 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'arcticicestudio/nord-vim'
+repo = 'lifepillar/vim-solarized8'
 hook_add = '''
     set termguicolors
-    set background=dark
-    colorscheme nord
+    colorscheme solarized8
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+hook_add = '''
+    let g:airline_theme = 'solarized'
+'''
+
+[[plugins]]
+repo = 'kat0h/vim-auto-color-switcher'
+hook_post_update =  '''
+    let g:dein#plugin.build = 'make'
+'''
+hook_add = '''
+    if !has('mac')
+        let g:auto_color_switcher#desable = v:true
+    endif
+    let g:auto_color_switcher#command={
+    \ 'light': 'set background=light',
+    \ 'dark': 'set background=dark'
+    \}
 '''
 
 [[plugins]]
@@ -92,3 +112,6 @@ repo = 'junegunn/goyo.vim'
 hook_add = '''
     let g:goyo_width = 119
 '''
+
+[[plugins]]
+repo = 'junegunn/limelight.vim'
