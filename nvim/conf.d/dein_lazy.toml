@@ -5,3 +5,7 @@ on_ft = ['jsonnet', 'libsonnet']
 [[plugins]]
 repo = 'arrufat/vala.vim'
 on_ft = ['vala']
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
