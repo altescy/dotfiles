@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.coffee,*.less]
 indent_size = 2
 
-[*.{js,ts,vue}]
+[*.{js,ts,vue,tsx}]
 indent_size = 2
 
 [*.{html,xml}]
