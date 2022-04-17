@@ -17,3 +17,7 @@ on_ft = ['svelte']
 [[plugins]]
 repo = 'mattn/vim-maketable'
 on_ft = ['md']
+
+[[plugins]]
+repo = 'alaviss/nim.nvim'
+on_ft = ['nim', 'nimble']
