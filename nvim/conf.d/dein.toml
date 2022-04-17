@@ -106,9 +106,6 @@ repo = 'Townk/vim-autoclose'
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
 repo = 'junegunn/goyo.vim'
 hook_add = '''
     let g:goyo_width = 119
@@ -125,3 +122,6 @@ merged = 0
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
+hook_add = '''
+    map <C-p> :Files<CR>
+'''
