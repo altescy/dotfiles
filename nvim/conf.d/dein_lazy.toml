@@ -9,3 +9,7 @@ on_ft = ['vala']
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'evanleck/vim-svelte'
+on_ft = ['svelte']
