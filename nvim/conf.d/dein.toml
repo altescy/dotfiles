@@ -115,3 +115,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'junegunn/limelight.vim'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
