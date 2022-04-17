@@ -105,7 +105,7 @@ fi
 
 ### choosenim
 if [ -d ~/.nimble/bin ]; then
-    export DO_NOT_TRACK=1
+    export CHOOSENIM_NO_ANALYTICS=1
     export PATH="$HOME/.nimble/bin:$PATH"
 fi
 
