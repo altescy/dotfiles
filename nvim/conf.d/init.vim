@@ -54,6 +54,11 @@ endif
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+" setup filetypes
+autocmd BufNewFile,BufRead *.jsonnet setfiletype jsonnet
+autocmd BufNewFile,BufRead *.libsonnet setfiletype libsonnet
+autocmd BufNewFile,BufRead *.nim setfiletype nim
+autocmd BufNewFile,BufRead *.nimble setfiletype nimble
 
 """ dein
 let s:dein_dir = expand('~/.cache/dein')
@@ -84,7 +89,10 @@ if dein#load_state(s:dein_dir)
 
   call dein#end()
   call dein#save_state()
+
+  filetype plugin indent on
 endif
+
 
 if dein#check_install()
   call dein#install()
