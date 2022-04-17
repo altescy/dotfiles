@@ -49,7 +49,7 @@ zsh_app:
 #  LANGUAGES
 #
 
-languages: clang golang node python rust
+languages: clang golang node python rust nim
 
 clang:
 	$(PWD)/bin/clang_install.sh
@@ -65,6 +65,9 @@ python: anyenv_app
 
 rust:
 	$(PWD)/bin/rust_install.sh
+
+nim:
+	$(PWD)/bin/nim_install.sh
 
 #
 #  CONFIGS
