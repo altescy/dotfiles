@@ -129,6 +129,7 @@ git_clean:
 nvim_clean:
 	rm -rf $(HOME)/.config/nvim
 	rm -rf $(HOME)/.config/coc
+	rm -rf $(HOME)/.cache/nvim
 	rm -rf $(HOME)/.cache/dein
 
 tmux_clean:
