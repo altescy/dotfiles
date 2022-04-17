@@ -9,6 +9,7 @@
     "coc-rls": "latest",
     "coc-sh": "latest",
     "coc-yaml": "latest",
-    "coc-xml": "latest"
+    "coc-xml": "latest",
+    "coc-svelte": "latest"
   }
 }
