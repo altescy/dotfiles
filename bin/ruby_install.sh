@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 reload() {
     if (type "anyenv" > /dev/null 2>&1); then
         eval "$(anyenv init -)"
@@ -18,7 +20,7 @@ if !(type "ruby" > /dev/null 2>&1); then
         fi
     fi
 
-    if (type "nodenv" > /dev/null 2>&1); then
+    if (type "rbenv" > /dev/null 2>&1); then
         # Install latest node
         RUBY_VERSION=`rbenv install -l | grep -E '^[0-9]+\.[0-9]+\.[0-9]$' | tail -n 1`
         yes | rbenv install $RUBY_VERSION
