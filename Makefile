@@ -49,7 +49,7 @@ zsh_app:
 #  LANGUAGES
 #
 
-languages: clang golang node python rust nim
+languages: clang golang node python rust nim ruby
 
 clang:
 	$(PWD)/bin/clang_install.sh
