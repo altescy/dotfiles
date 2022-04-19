@@ -9,7 +9,7 @@ if !(type "valac" > /dev/null 2>&1); then
       ;;
     linux*)
       if (type "apt-get" > /dev/null 2>&1); then
-        sudo apt-get install -y valac vala-language-server
+        sudo apt-get install -y valac
       fi
       ;;
   esac
