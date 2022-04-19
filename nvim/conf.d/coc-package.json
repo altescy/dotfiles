@@ -11,6 +11,7 @@
     "coc-yaml": "latest",
     "coc-xml": "latest",
     "coc-svelte": "latest",
-    "coc-markdownlint": "latest"
+    "coc-markdownlint": "latest",
+    "coc-solargraph": "latest"
   }
 }
