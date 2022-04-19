@@ -124,4 +124,18 @@ repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
     map <C-p> :Files<CR>
+
+    let s:preview_cmd = 'cat {}'
+    if system('command -v bat') != ''
+        let s:bat_theme = "Solarized (dark)"
+        if &background == "light"
+            let s:bat_theme = "Solarized (light)"
+        endif
+        let s:preview_cmd = 'bat --color=always --theme "' . s:bat_theme . '" {}'
+    endif
+
+    command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {
+    \   'options': ['--layout=reverse', '--info=inline', '--preview', s:preview_cmd]
+    \ }, <bang>0)
 '''
