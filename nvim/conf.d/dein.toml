@@ -34,7 +34,12 @@ hook_post_update =  '''
     let g:dein#plugin.build = 'make'
 '''
 hook_add = '''
-    if !has('mac')
+    if system('command -v ostheme') != ''
+        " Use ostheme command to detect os appearance theme.
+        " See the following link for more details about ostheme:
+        "     https://github.com/altescy/ostheme
+        let g:auto_color_switcher#binary_path = 'ostheme --observe'
+    elseif !has('mac')
         let g:auto_color_switcher#disable = v:true
     endif
     let g:auto_color_switcher#command={
