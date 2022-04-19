@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if !(type "valac" > /dev/null 2>&1); then
   case ${OSTYPE} in
     darwin*)
