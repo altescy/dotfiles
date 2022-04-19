@@ -8,6 +8,10 @@
     "nim": {
       "command": "nimlsp",
       "filetypes": ["nim"]
+    },
+    "vala": {
+      "command": "vala-language-server",
+      "filetypes": ["vala", "genie"]
     }
   }
 }
