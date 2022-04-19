@@ -6,12 +6,9 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
 augroup END
 
-
 set noswapfile
 
-
 let mapleader = "\<Space>"
-
 
 inoremap <C-c> <ESC>
 inoremap <silent> jj <ESC>
@@ -20,11 +17,6 @@ inoremap <silent> <C-j> j
 inoremap <silent> <C-k> k
 noremap <C-c><C-c> :nohlsearch<Cr><Esc>
 noremap <C-N><C-N> :set relativenumber!<CR>
-
-
-filetype plugin on
-filetype indent on
-
 
 set tabstop=4
 set shiftwidth=4
@@ -42,10 +34,8 @@ set mouse=a
 set spell
 set spelllang=en,cjk
 
-
 autocmd ColorScheme * hi clear SpellBad
     \| hi SpellBad cterm=underline
-
 
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
@@ -63,6 +53,7 @@ autocmd BufNewFile,BufRead *.nimble setfiletype nimble
 """ dein
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let g:dein#install_process_timeout = 600
 
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -92,7 +83,6 @@ if dein#load_state(s:dein_dir)
 
   filetype plugin indent on
 endif
-
 
 if dein#check_install()
   call dein#install()
