@@ -35,7 +35,7 @@ hook_post_update =  '''
 '''
 hook_add = '''
     if !has('mac')
-        let g:auto_color_switcher#desable = v:true
+        let g:auto_color_switcher#disable = v:true
     endif
     let g:auto_color_switcher#command={
     \ 'light': 'set background=light',
