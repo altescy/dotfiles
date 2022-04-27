@@ -143,3 +143,9 @@ hook_add = '''
     \   'options': ['--layout=reverse', '--info=inline', '--preview', s:preview_cmd]
     \ }, <bang>0)
 '''
+
+[[plugins]]
+repo = "airblade/vim-gitgutter"
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
