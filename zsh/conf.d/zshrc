@@ -82,6 +82,10 @@ if is_exists 'tmux'; then
     alias tmux-revertkey='tmux set-option -ag prefix C-a'
 fi
 
+if is_exists nvim; then;
+    EDITOR=nvim
+fi
+
 ### starship
 if is_exists starship; then
     eval "$(starship init zsh)"
@@ -96,6 +100,11 @@ fi
 ### anyenv
 if is_exists anyenv; then
     eval "$(anyenv init -)"
+fi
+
+### direnv
+if is_exists direnv; then
+    eval "$(direnv hook zsh)"
 fi
 
 ### rustup
@@ -115,6 +124,18 @@ if [ -f ~/.fzf.zsh ]; then
     export FZF_DEFAULT_OPTS='--height 50% --reverse --border'
 fi
 
+### pet
+if is_exists pet; then
+    function pet-select() {
+      BUFFER=$(pet search --query "$LBUFFER")
+      CURSOR=$#BUFFER
+      zle redisplay
+    }
+    zle -N pet-select
+    stty -ixon
+    bindkey '^s' pet-select
+fi
+
 ### utilities
 case ${OSTYPE} in
     linux*)
@@ -127,6 +148,12 @@ case ${OSTYPE} in
         fi
         if is_exists gs; then
             alias pdfcat="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=-"
+        fi
+        if is_exists make; then
+            alias m="make"
+        fi
+        if is_exists exa; then
+            alias e="exa"
         fi
     ;;
 esac
