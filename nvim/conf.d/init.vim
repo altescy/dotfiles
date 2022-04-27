@@ -18,6 +18,10 @@ inoremap <silent> <C-k> k
 noremap <C-c><C-c> :nohlsearch<Cr><Esc>
 noremap <C-N><C-N> :set relativenumber!<CR>
 
+" For terminal
+tnoremap <Esc> <C-\><C-n>
+command! -nargs=* T split | wincmd j | resize 10 | terminal <args>
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
