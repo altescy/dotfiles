@@ -7,9 +7,9 @@ DOCKER_CONTAINER_NAME = dotfiles
 DOCKERFILE_PATH       = $(PWD)/Dockerfile
 
 .PHONY: all brew \
-        apps anyenv_app fzf_app git_app nvim_app poetry_app tmux_app zsh_app \
+        apps anyenv_app fzf_app git_app nvim_app poetry_app tmux_app zsh_app efm_app \
         languages clang golang node python rust nim ruby vala \
-        configs editorconfig git nvim poetry tmux zsh \
+        configs editorconfig git nvim poetry tmux zsh efm \
         docker docker_attach docker_build docker_run docker_stop \
         clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
@@ -22,7 +22,7 @@ brew:
 #  APPS
 #
 
-apps: git_app anyenv_app fzf_app nvim_app tmux_app zsh_app
+apps: git_app anyenv_app fzf_app nvim_app tmux_app zsh_app efm_app
 
 anyenv_app:
 	$(PWD)/bin/anyenv_install.sh
@@ -44,6 +44,9 @@ tmux_app:
 
 zsh_app:
 	$(PWD)/zsh/bin/install.sh
+
+efm_app:
+	$(PWD)/efm/bin/install.sh
 
 #
 #  LANGUAGES
@@ -99,6 +102,9 @@ tmux: tmux_app
 zsh: zsh_app
 	$(PWD)/zsh/bin/setup.sh
 
+efm: efm_app
+	$(PWD)/efm/bin/setup.sh
+
 #
 #  DOCKER
 #
@@ -143,3 +149,6 @@ tmux_clean:
 
 zsh_clean:
 	rm -rf $(HOME)/.zshrc
+
+efm_clean:
+	rm -rf $(HOME)/.config/efm-langserver
