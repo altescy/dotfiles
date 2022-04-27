@@ -49,6 +49,7 @@ autocmd BufNewFile,BufRead *.jsonnet setfiletype jsonnet
 autocmd BufNewFile,BufRead *.libsonnet setfiletype libsonnet
 autocmd BufNewFile,BufRead *.nim setfiletype nim
 autocmd BufNewFile,BufRead *.nimble setfiletype nimble
+autocmd BufNewFile,BufRead *.hsh setfiletype hush
 
 """ dein
 let s:dein_dir = expand('~/.cache/dein')

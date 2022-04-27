@@ -21,3 +21,7 @@ on_ft = ['markdown']
 [[plugins]]
 repo = 'alaviss/nim.nvim'
 on_ft = ['nim', 'nimble']
+
+[[plugins]]
+repo = 'altescy/hush.vim'
+on_ft = ['hush']
