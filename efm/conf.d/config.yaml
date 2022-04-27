@@ -1,0 +1,6 @@
+languages:
+  hush:
+    lint-command: 'hush --check ${INPUT}'
+    lint-formats:
+      - 'Error: %f (line %l, column %c) - %m'
+      - 'Error: %m'
