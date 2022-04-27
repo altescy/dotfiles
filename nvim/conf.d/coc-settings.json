@@ -5,6 +5,11 @@
   "pyright.disableDiagnostics": true,
   "svelte.enable-ts-plugin": true,
   "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    },
     "nim": {
       "command": "nimlsp",
       "filetypes": ["nim"]

@@ -30,5 +30,13 @@ fi
 
 go version
 
-go get -u golang.org/x/tools/cmd/gopls
-go get golang.org/x/tools/cmd/goimports
+
+if !(type "gopls" > /dev/null 2>&1); then
+    go install golang.org/x/tools/gopls@latest
+fi
+if !(type "goimports" > /dev/null 2>&1); then
+    go install golang.org/x/tools/cmd/goimports@latest
+fi
+if !(type "staticcheck" > /dev/null 2>&1); then
+    go install honnef.co/go/tools/cmd/staticcheck@2022.1
+fi
