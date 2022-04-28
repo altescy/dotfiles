@@ -1,6 +1,21 @@
-languages:
-  hush:
+tools:
+  hush: &hush
     lint-command: 'hush --check ${INPUT}'
     lint-formats:
       - 'Error: %f (line %l, column %c) - %m'
       - 'Error: %m'
+
+  textlint: &textlint
+    lint-command: 'npx textlint --format unix ${INPUT}'
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+languages:
+  hush:
+    - <<: *hush
+
+  markdown:
+    - <<: *textlint
+
+  text:
+    - <<: *textlint
