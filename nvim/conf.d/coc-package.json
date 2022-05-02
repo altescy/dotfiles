@@ -12,6 +12,7 @@
     "coc-xml": "latest",
     "coc-svelte": "latest",
     "coc-markdownlint": "latest",
-    "coc-solargraph": "latest"
+    "coc-solargraph": "latest",
+    "coc-zig": "latest"
   }
 }

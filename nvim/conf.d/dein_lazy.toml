@@ -25,3 +25,7 @@ on_ft = ['nim', 'nimble']
 [[plugins]]
 repo = 'altescy/hush.vim'
 on_ft = ['hush']
+
+[[plugins]]
+repo = 'ziglang/zig.vim'
+on_ft = ['zig']
