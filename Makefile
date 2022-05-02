@@ -8,7 +8,7 @@ DOCKERFILE_PATH       = $(PWD)/Dockerfile
 
 .PHONY: all brew \
         apps anyenv_app fzf_app git_app nvim_app poetry_app tmux_app zsh_app efm_app \
-        languages clang golang node python rust nim ruby vala \
+        languages clang golang node python rust nim ruby vala zig \
         configs editorconfig git nvim poetry tmux zsh efm \
         docker docker_attach docker_build docker_run docker_stop \
         clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
@@ -52,7 +52,7 @@ efm_app:
 #  LANGUAGES
 #
 
-languages: clang golang node python rust nim ruby vala
+languages: clang golang node python rust nim ruby vala zig
 
 clang:
 	$(PWD)/bin/clang_install.sh
@@ -77,6 +77,9 @@ ruby:
 
 vala:
 	$(PWD)/bin/vala_install.sh
+
+zig:
+	$(PWD)/bin/zig_install.sh
 
 #
 #  CONFIGS

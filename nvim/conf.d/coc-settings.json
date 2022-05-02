@@ -4,6 +4,8 @@
   "python.linting.mypyEnabled": true,
   "pyright.disableDiagnostics": true,
   "svelte.enable-ts-plugin": true,
+  "zig.enabled": true,
+  "zig.path": "zls",
   "languageserver": {
     "golang": {
       "command": "gopls",
