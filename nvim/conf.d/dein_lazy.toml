@@ -19,6 +19,11 @@ repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 
 [[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'
+
+[[plugins]]
 repo = 'alaviss/nim.nvim'
 on_ft = ['nim', 'nimble']
 
