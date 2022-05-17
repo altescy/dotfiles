@@ -104,7 +104,15 @@ hook_add = '''
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-hook_add = 'map <C-n> :NERDTreeToggle<CR>'
+hook_add = '''
+    let g:NERDTreeShowHidden=1
+    map <C-n> :NERDTreeToggle<CR>
+
+    let g:NERDTreeIgnore = [
+    \ '.DS_Store', '.Trashes', '.history',
+    \ '\.git$',  '__pycache__', '\.py[cod]$', '\.mypy_cache', '\.pytest_cache', '\.venv', '.ipynb_checkpoints'
+    \ ]
+'''
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
