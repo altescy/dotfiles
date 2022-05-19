@@ -109,8 +109,8 @@ hook_add = '''
     map <C-n> :NERDTreeToggle<CR>
 
     let g:NERDTreeIgnore = [
-    \ '.DS_Store', '.Trashes', '.history',
-    \ '\.git$',  '__pycache__', '\.py[cod]$', '\.mypy_cache', '\.pytest_cache', '\.venv', '.ipynb_checkpoints'
+    \ '\.DS_Store', '\.Trashes', '\.history',
+    \ '\.git$',  '__pycache__', '\.py[cod]$', '\.mypy_cache', '\.pytest_cache', '\.venv', '\.ipynb_checkpoints'
     \ ]
 '''
 
