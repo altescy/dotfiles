@@ -162,3 +162,6 @@ repo = "airblade/vim-gitgutter"
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'github/copilot.vim'
