@@ -20,7 +20,7 @@ indent_size = 2
 [*.{json,jsonnet,libsonnet,yml,yaml}]
 indent_size = 2
 
-[*.rb]
+[*.{rb,cr}]
 indent_size = 2
 
 [*.go]
