@@ -54,6 +54,7 @@ autocmd BufNewFile,BufRead *.libsonnet setfiletype libsonnet
 autocmd BufNewFile,BufRead *.nim setfiletype nim
 autocmd BufNewFile,BufRead *.nimble setfiletype nimble
 autocmd BufNewFile,BufRead *.hsh setfiletype hush
+autocmd BufNewFile,BufRead *.cr setfiletype crystal
 
 """ dein
 let s:dein_dir = expand('~/.cache/dein')

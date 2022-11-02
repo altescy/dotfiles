@@ -34,3 +34,7 @@ on_ft = ['hush']
 [[plugins]]
 repo = 'ziglang/zig.vim'
 on_ft = ['zig']
+
+[[plugins]]
+repo = 'vim-crystal/vim-crystal'
+on_ft = ['crystal']

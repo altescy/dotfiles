@@ -99,6 +99,7 @@ hook_add = '''
     \   'python': ['black', 'isort'],
     \   'rust': ['rustfmt'],
     \   'nim': ['nimpretty'],
+    \   'crystal': ['crystal'],
     \}
 '''
 

@@ -64,6 +64,16 @@
       "command": "efm-langserver",
       "args": [],
       "filetypes": ["*"]
+    },
+    "crystal": {
+      "command": "crystalline",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "crystal"
+      ],
+      "rootPatterns": ["shard.yml"]
     }
   }
 }
