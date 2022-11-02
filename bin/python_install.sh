@@ -27,7 +27,7 @@ if (type "pyenv" > /dev/null 2>&1); then
 
     # Upgrade conda & python
     conda update -y conda
-    conda install -y python=3.8
+    conda install -y python=3.10
 fi
 
 python --version
