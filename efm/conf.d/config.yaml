@@ -10,6 +10,11 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
 
+  refurb: &refurb
+    lint-command: 'refurb --quiet ${INPUT}'
+    lint-formats:
+      - '%f:%l:%c %m'
+
 languages:
   hush:
     - <<: *hush
@@ -19,3 +24,6 @@ languages:
 
   text:
     - <<: *textlint
+
+  python:
+    - <<: *refurb
