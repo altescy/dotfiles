@@ -23,6 +23,7 @@ repo = 'lifepillar/vim-solarized8'
 hook_add = '''
     set termguicolors
     colorscheme solarized8
+    let g:solarized_termtrans = 1
 '''
 
 [[plugins]]
