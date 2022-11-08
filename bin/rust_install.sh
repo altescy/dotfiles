@@ -5,4 +5,4 @@ if !(type "rustup" > /dev/null 2>&1); then
     source ~/.cargo/env
 fi
 
-rustup component add rls rust-analysis rust-src
+rustup component add clippy rust-analysis rust-analyzer rust-src rust-docs rustfmt

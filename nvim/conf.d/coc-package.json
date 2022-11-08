@@ -6,7 +6,7 @@
     "coc-html": "latest",
     "coc-json": "latest",
     "coc-pyright": "latest",
-    "coc-rls": "latest",
+    "coc-rust-analyzer": "latest",
     "coc-sh": "latest",
     "coc-yaml": "latest",
     "coc-xml": "latest",
