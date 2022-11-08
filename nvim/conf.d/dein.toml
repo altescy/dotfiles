@@ -18,6 +18,9 @@ hook_add = '''
     nmap <Tab> <Plug>AirlineSelectNextTab
 '''
 
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+
 [[plugins]]
 repo = 'lifepillar/vim-solarized8'
 hook_add = '''
@@ -29,7 +32,7 @@ hook_add = '''
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 hook_add = '''
-    let g:airline_theme = 'solarized'
+    let g:airline_theme = 'transparent'
 '''
 
 [[plugins]]
@@ -52,8 +55,8 @@ hook_add = '''
     \}
 '''
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
+# [[plugins]]
+# repo = 'ryanoasis/vim-devicons'
 
 ### UTILITIES
 [[plugins]]
