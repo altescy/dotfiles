@@ -117,7 +117,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'm4xshen/autoclose.nvim'
+repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
