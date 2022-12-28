@@ -56,6 +56,8 @@ autocmd BufNewFile,BufRead *.nimble setfiletype nimble
 autocmd BufNewFile,BufRead *.hsh setfiletype hush
 autocmd BufNewFile,BufRead *.cr setfiletype crystal
 
+let g:vim_json_conceal = 0
+
 """ dein
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
