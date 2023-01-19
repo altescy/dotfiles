@@ -25,6 +25,10 @@ zstyle ':completion:*:approximate:*' max-errors 3 numeric
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                                            /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
+### zsh utils
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^O" edit-command-line
 
 ### TMUX settings
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
