@@ -109,7 +109,7 @@ fi
 
 ### anyenv
 if is_exists anyenv; then
-    eval "$(anyenv init -)"
+    eval "$(anyenv init - zsh)"
 fi
 
 ### direnv
