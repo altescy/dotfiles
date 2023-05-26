@@ -75,6 +75,12 @@
         "crystal"
       ],
       "rootPatterns": ["shard.yml"]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
     }
   }
 }

@@ -50,3 +50,7 @@ on_ft = ['zig']
 [[plugins]]
 repo = 'vim-crystal/vim-crystal'
 on_ft = ['crystal']
+
+[[plugins]]
+repo = 'hashivim/vim-terraform'
+on_ft = ['terraform']
