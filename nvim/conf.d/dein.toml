@@ -164,3 +164,9 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'github/copilot.vim'
+hook_add = '''
+    let g:copilot_filetypes = {
+    \   'markdown': '1',
+    \   'yaml': '1',
+    \ }
+'''
