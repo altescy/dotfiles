@@ -118,6 +118,11 @@ hook_add = '''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+hook_add = '''
+    for char in ['(', '[', '{', '"', "'"]
+        call lexima#add_rule({'char': char, 'input': char, 'at': '\%#[^$ ]'})
+    endfor
+'''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
