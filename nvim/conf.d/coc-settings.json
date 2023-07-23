@@ -4,6 +4,8 @@
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
   "pyright.disableDiagnostics": true,
+  "tsserver.enable": true,
+  "tsserver.useLocalTsdk": true,
   "svelte.enable-ts-plugin": true,
   "zig.enabled": true,
   "zig.path": "zls",
@@ -81,6 +83,11 @@
       "args": ["serve"],
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
+    },
+    "jsonnet": {
+      "command": "jsonnet-language-server",
+      "args": [],
+      "filetypes": ["jsonnet", "libsonnet"]
     }
   }
 }

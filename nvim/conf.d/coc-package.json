@@ -8,6 +8,7 @@
     "coc-pyright": "latest",
     "coc-rust-analyzer": "latest",
     "coc-sh": "latest",
+    "coc-tsserver": "latest",
     "coc-yaml": "latest",
     "coc-xml": "latest",
     "coc-svelte": "latest",
