@@ -95,6 +95,7 @@ hook_add = '''
     \   'rust': ['rustfmt'],
     \   'nim': ['nimpretty'],
     \   'crystal': ['crystal'],
+    \   'terraform': ['terraform'],
     \}
 '''
 
