@@ -25,5 +25,8 @@ languages:
   text:
     - <<: *textlint
 
+  tex:
+    - <<: *textlint
+
   python:
     - <<: *refurb
