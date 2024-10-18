@@ -32,6 +32,9 @@ indent_size = 2
 [*.tf]
 indent_size = 2
 
+[*.avsc]
+indent_size = 2
+
 [*.tsv]
 indent_style = tab
 
