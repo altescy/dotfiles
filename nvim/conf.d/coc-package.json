@@ -5,7 +5,6 @@
     "coc-go": "latest",
     "coc-html": "latest",
     "coc-json": "latest",
-    "coc-pyright": "latest",
     "coc-rust-analyzer": "latest",
     "coc-sh": "latest",
     "coc-tsserver": "latest",

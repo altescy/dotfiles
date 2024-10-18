@@ -3,7 +3,6 @@
   "python.venvPath": ".venv",
   "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": true,
-  "pyright.disableDiagnostics": true,
   "tsserver.enable": true,
   "tsserver.useLocalTsdk": true,
   "svelte.enable-ts-plugin": true,
