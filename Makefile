@@ -52,7 +52,7 @@ efm_app:
 #  LANGUAGES
 #
 
-languages: clang golang node python rust nim ruby vala zig crystal
+languages: clang golang node python rust nim ruby vala zig crystal lua
 
 clang:
 	$(PWD)/bin/clang_install.sh
@@ -83,6 +83,9 @@ zig:
 
 crystal:
 	$(PWD)/bin/crystal_install.sh
+
+lua:
+	$(PWD)/bin/lua_install.sh
 
 #
 #  CONFIGS
