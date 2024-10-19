@@ -258,14 +258,8 @@ return require("packer").startup(function(use)
     tag = "*",
     config = function()
       require("toggleterm").setup({
-        size = function(term)
-          if term.direction == "horizontal" then
-            return 10
-          elseif term.direction == "horizontal" then
-            return vim.o.columns * 0.3
-          end
-        end,
-        direction = "vertical",
+        size = 10,
+        direction = "horizontal",
       })
     end,
   })
