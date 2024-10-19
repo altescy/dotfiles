@@ -34,15 +34,26 @@ return require("packer").startup(function(use)
   use({
     "nvim-lualine/lualine.nvim",
     config = function()
-      local colors = {
-        blue = "#769edd",
-        cyan = "#79dac8",
-        black = "#080808",
-        white = "#c6c6c6",
-        red = "#ff5189",
-        violet = "#8870a6",
-        grey = "#303030",
+      local colors_dark = {
+        blue = "#839bd3",
+        cyan = "#739389",
+        black = "#080616",
+        white = "#dbd7bc",
+        red = "#b44947",
+        violet = "#917fb4",
+        grey = "#717169",
       }
+      local colors_light = {
+        blue = "#839bd3",
+        cyan = "#597b75",
+        black = "#1f1f28",
+        white = "#f2ecbc",
+        red = "#c84053",
+        violet = "#b35b79",
+        grey = "#8a8980",
+      }
+
+      local colors = colors_dark
 
       local kanagawa_theme = {
         normal = {
@@ -111,7 +122,17 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use({ "rebelot/kanagawa.nvim" })
+  use({
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup({
+        backgronnd = {
+          dark = "wave",
+          light = "lotus",
+        },
+      })
+    end,
+  })
 
   use({
     "nvim-telescope/telescope.nvim",
@@ -213,6 +234,8 @@ return require("packer").startup(function(use)
       vim.api.nvim_set_keymap("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true })
     end,
   })
+
+  use({ "vimpostor/vim-lumen" })
 
   if packer_bootstrap then
     require("packer").sync()
