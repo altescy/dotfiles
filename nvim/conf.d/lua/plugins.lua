@@ -153,11 +153,16 @@ return require("packer").startup(function(use)
     config = function()
       require("conform").setup({
         formatters_by_ft = {
+          c = { "clang-format" },
+          cpp = { "clang-format" },
+          crystal = { "crystal" },
+          go = { "goimports", "gofmt" },
           lua = { "stylua" },
+          nim = { "nimpretty" },
           python = { "isort", "black" },
           rust = { "rustfmt", lsp_format = "fallback" },
-          go = { "goimports", "gofmt" },
-          ["_"] = { "trim_whitespace" },
+          terraform = { "terraform_fmt" },
+          ["*"] = { "trim_whitespace", "trim_newlines" },
         },
         format_on_save = {
           lsp_format = "fallback",
