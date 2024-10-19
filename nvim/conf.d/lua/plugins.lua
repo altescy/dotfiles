@@ -1,4 +1,3 @@
-vim.cmd("colorscheme kanagawa")
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -125,6 +124,7 @@ return require("packer").startup(function(use)
   use({
     "rebelot/kanagawa.nvim",
     config = function()
+      vim.cmd("colorscheme kanagawa")
       require("kanagawa").setup({
         backgronnd = {
           dark = "wave",
