@@ -113,8 +113,8 @@ return require("packer").startup(function(use)
       require("bufferline").setup({
         options = {
           numbers = "ordinal",
+          separator_style = "slant",
         },
-        highlights = {},
       })
       vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true })
       vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true })
