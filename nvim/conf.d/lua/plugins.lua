@@ -237,6 +237,12 @@ return require("packer").startup(function(use)
 
   use({ "vimpostor/vim-lumen" })
 
+  use({
+    "google/vim-jsonnet",
+    opt = true,
+    ft = { "jsonnet" },
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end
