@@ -113,7 +113,12 @@ return require("packer").startup(function(use)
       require("bufferline").setup({
         options = {
           numbers = "ordinal",
+          diagnostics = "coc",
           separator_style = "slant",
+          diagnostics_indicator = function(count, level)
+            local icon = level:match("error") and " " or ""
+            return " " .. icon
+          end,
         },
       })
       vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true })
@@ -246,6 +251,23 @@ return require("packer").startup(function(use)
     "google/vim-jsonnet",
     opt = true,
     ft = { "jsonnet" },
+  })
+
+  use({
+    "akinsho/toggleterm.nvim",
+    tag = "*",
+    config = function()
+      require("toggleterm").setup({
+        size = function(term)
+          if term.direction == "horizontal" then
+            return 10
+          elseif term.direction == "horizontal" then
+            return vim.o.columns * 0.3
+          end
+        end,
+        direction = "vertical",
+      })
+    end,
   })
 
   if packer_bootstrap then

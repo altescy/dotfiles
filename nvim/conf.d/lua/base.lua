@@ -39,7 +39,7 @@ vim.api.nvim_set_keymap("n", "<C-N><C-N>", ":set relativenumber!<CR>", { noremap
 -- FOR TERMINAL
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 vim.api.nvim_create_user_command("T", function(args)
-  vim.cmd("split | wincmd j | resize 10 | terminal " .. args.args)
+  vim.cmd("ToggleTerm" .. args.args)
 end, { nargs = "*" })
 
 -- INDENTATION AND FORMATTING
@@ -104,8 +104,18 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- DISABLE JSON CONCEAL
 vim.g.vim_json_conceal = 0
 
--- Show double byte spaces
+-- SHOW DOUBLE BYTE SPACES
 vim.cmd([[
   hi DoubleByteSpace term=underline ctermbg=blue guibg=darkgray
   match DoubleByteSpace /　/
 ]])
+
+-- TERMINAL
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = "*",
+  command = "startinsert",
+})
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = "*",
+  command = "setlocal nonumber norelativenumber",
+})
