@@ -103,3 +103,9 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 -- DISABLE JSON CONCEAL
 vim.g.vim_json_conceal = 0
+
+-- Show double byte spaces
+vim.cmd([[
+  hi DoubleByteSpace term=underline ctermbg=blue guibg=darkgray
+  match DoubleByteSpace /　/
+]])
