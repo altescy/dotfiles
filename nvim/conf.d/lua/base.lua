@@ -38,9 +38,6 @@ vim.api.nvim_set_keymap("n", "<C-N><C-N>", ":set relativenumber!<CR>", { noremap
 
 -- FOR TERMINAL
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
-vim.api.nvim_create_user_command("T", function(args)
-  vim.cmd("ToggleTerm" .. args.args)
-end, { nargs = "*" })
 
 -- INDENTATION AND FORMATTING
 vim.opt.tabstop = 4
