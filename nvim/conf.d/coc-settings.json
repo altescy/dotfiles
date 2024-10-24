@@ -8,6 +8,7 @@
   "pylsp.builtin.enableInstallPylsIsort": true,
   "pylsp.builtin.enableInstallPythonLspBlack": true,
   "pylsp.plugins.pycodestyle.enabled": false,
+  "pylsp.plugins.pyflakes.enabled": false,
   "tsserver.enable": true,
   "tsserver.useLocalTsdk": true,
   "svelte.enable-ts-plugin": true,
