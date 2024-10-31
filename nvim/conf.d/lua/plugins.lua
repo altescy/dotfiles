@@ -271,6 +271,12 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown", "pandoc.markdown", "rmarkdown" },
+    run = "cd app && npx --yes yarn install",
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end
