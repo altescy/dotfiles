@@ -72,6 +72,8 @@ return {
         lspconfig[server].setup(config)
         vim.lsp.enable(server)
       end
+
+      vim.keymap.set("n", "gd", "<cmd>:lua vim.lsp.buf.definition()<CR>")
     end,
   },
 }
