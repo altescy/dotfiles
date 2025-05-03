@@ -4,55 +4,59 @@ return {
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
+      "saghen/blink.cmp",
     },
-    config = function()
+    opts = {
+      servers = {
+        -- lua
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              diagnostics = {
+                globals = { "vim", "require" },
+              },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        },
+        -- python
+        pyright = {},
+        ruff = {},
+        -- sh
+        bashls = {},
+        -- text
+        vale_ls = {},
+        -- typescript
+        ts_ls = {},
+        -- yaml
+        yamlls = {},
+      },
+    },
+    config = function(_, opts)
+      local ensure_installed = {}
+      for server, _ in pairs(opts.servers) do
+        table.insert(ensure_installed, server)
+      end
+
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          -- lua
-          "lua_ls",
-          -- python
-          "pyright",
-          "ruff",
-          -- sh
-          "bashls",
-          -- text,
-          "vale_ls",
-          -- yaml
-          "yamlls",
-        },
+        ensure_installed = ensure_installed,
         automatic_installation = true,
       })
 
       local lspconfig = require("lspconfig")
 
-      -- lua
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = {
-              globals = { "vim", "require" },
-            },
-          },
-          workspace = {
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
-          telemetry = {
-            enable = false,
-          },
-        },
-      })
-      vim.lsp.enable("lua_ls")
-      -- python
-      vim.lsp.enable("pyright")
-      vim.lsp.enable("ruff")
-      -- sh
-      vim.lsp.enable("bashls")
-      -- text
-      vim.lsp.enable("vale_ls")
-      -- yaml
-      vim.lsp.enable("yamlls")
+      for server, config in pairs(opts.servers) do
+        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        lspconfig[server].setup(config)
+        vim.lsp.enable(server)
+      end
     end,
   },
 }
