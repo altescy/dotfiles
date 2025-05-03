@@ -1,6 +1,7 @@
 vim.scriptencoding = "utf-8"
 
 -- LINE NUMBER vim.opt.number = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.api.nvim_create_augroup("numbertoggle", {})
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
@@ -57,7 +58,7 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 -- CURSORLINE AND CURSORCOLUMN
 vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+vim.opt.cursorcolumn = false
 
 -- MOUSE AND SPELLCHECK
 vim.opt.mouse = "a"
