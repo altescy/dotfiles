@@ -1,6 +1,8 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    lazy = true,
     branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
