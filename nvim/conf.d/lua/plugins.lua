@@ -164,7 +164,13 @@ return require("packer").startup(function(use)
           go = { "goimports", "gofmt" },
           lua = { "stylua" },
           nim = { "nimpretty" },
-          python = { "isort", "black" },
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format" }
+            else
+              return { "isort", "black" }
+            end
+          end,
           rust = { "rustfmt", lsp_format = "fallback" },
           terraform = { "terraform_fmt" },
           ["*"] = { "trim_whitespace", "trim_newlines" },
