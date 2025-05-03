@@ -8,6 +8,10 @@ return {
     },
     opts = {
       servers = {
+        -- go
+        gopls = {},
+        -- html
+        html = {},
         -- lua
         lua_ls = {
           settings = {
@@ -28,6 +32,8 @@ return {
         -- python
         pyright = {},
         ruff = {},
+        -- rust
+        rust_analyzer = {},
         -- sh
         bashls = {},
         -- text
@@ -36,6 +42,12 @@ return {
         ts_ls = {},
         -- yaml
         yamlls = {},
+        -- others
+        efm = {},
+        typos_lsp = {
+          cmd = { "typos-lsp" },
+          root_markers = { "typos.toml", "_typos.toml", ".typos.toml", "pyproject.toml", "Cargo.toml", ".git" },
+        },
       },
     },
     config = function(_, opts)
