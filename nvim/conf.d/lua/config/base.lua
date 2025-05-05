@@ -1,6 +1,6 @@
 vim.scriptencoding = "utf-8"
 
--- LINE NUMBER vim.opt.number = true
+-- LINE NUMBER
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.api.nvim_create_augroup("numbertoggle", {})
@@ -83,3 +83,6 @@ vim.cmd([[
   hi DoubleByteSpace term=underline ctermbg=blue guibg=darkgray
   match DoubleByteSpace /　/
 ]])
+
+-- MISC
+vim.opt.wrap = false
