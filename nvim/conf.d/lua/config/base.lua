@@ -27,7 +27,13 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 vim.opt.swapfile = false
 
 -- DIAGNOSTIC
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+  virtual_text = true,
+  severity_sort = true,
+  float = {
+    source = "always",
+  },
+})
 
 -- INDENTATION AND FORMATTING
 vim.opt.tabstop = 4
