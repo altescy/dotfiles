@@ -216,12 +216,13 @@ return {
               automatic_installation = true,
             })
 
-            local lspconfig = require("lspconfig")
             local cmp = require("blink.cmp")
             for server, config in pairs(opts.servers) do
               if not config.available or config.available(config, fname) then
-                config.capabilities = cmp.get_lsp_capabilities(config.capabilities)
-                lspconfig[server].setup(config.lsp or {})
+                local lsp_config = config.lsp or {}
+                lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
+                vim.lsp.config[server] = lsp_config
+                vim.lsp.enable(server)
               end
             end
 
