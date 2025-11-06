@@ -89,18 +89,32 @@ return {
         -- lua
         lua_ls = {
           lsp = {
+            root_dir = function(fname)
+              local util = require("lspconfig.util")
+              return util.root_pattern(".git", "stylua.toml", ".stylua.toml")(fname) or util.path.dirname(fname)
+            end,
             settings = {
               Lua = {
-                runtime = { version = "LuaJIT" },
-                diagnostics = {
-                  globals = { "vim", "require" },
+                runtime = {
+                  version = "LuaJIT",
                 },
-              },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-              },
-              telemetry = {
-                enable = false,
+                diagnostics = {
+                  globals = { "vim" },
+                  disable = { "missing-fields" },
+                },
+                workspace = {
+                  library = {
+                    vim.env.VIMRUNTIME,
+                    vim.fn.stdpath("config"),
+                  },
+                  checkThirdParty = false,
+                },
+                telemetry = {
+                  enable = false,
+                },
+                completion = {
+                  callSnippet = "Replace",
+                },
               },
             },
           },
@@ -180,31 +194,40 @@ return {
                 :start()
             end
           end,
-          lsp = {
-            root_dir = function(fname)
-              local util = require("lspconfig.util")
-              return util.root_pattern(
-                "pyproject.toml",
-                "setup.py",
-                "setup.cfg",
-                "Pipfile",
-                "requirements.txt",
-                ".venv"
-              )(fname) or util.path.dirname(fname)
-            end,
-            settings = {
-              pylsp = {
-                plugins = {
-                  pycodestyle = { enabled = true },
-                  pylint = { enabled = true },
-                  flake8 = { enabled = false },
-                  mypy = { enabled = true },
-                  black = { enabled = true },
-                  isort = { enabled = true },
+          get_lsp_config = function(config, fname)
+            local root = get_python_root(fname)
+            if not root then
+              return {}
+            end
+
+            local proj_config = get_project_config(root)
+            local util = require("lspconfig.util")
+
+            return {
+              root_dir = function(fname)
+                return util.root_pattern(
+                  "pyproject.toml",
+                  "setup.py",
+                  "setup.cfg",
+                  "Pipfile",
+                  "requirements.txt",
+                  ".venv"
+                )(fname) or util.path.dirname(fname)
+              end,
+              settings = {
+                pylsp = {
+                  plugins = {
+                    pycodestyle = { enabled = true },
+                    pylint = { enabled = proj_config.has_pylint },
+                    flake8 = { enabled = false },
+                    mypy = { enabled = proj_config.has_mypy },
+                    black = { enabled = proj_config.has_black },
+                    isort = { enabled = proj_config.has_isort },
+                  },
                 },
               },
-            },
-          },
+            }
+          end,
         },
         -- rust
         rust_analyzer = {},
@@ -239,6 +262,16 @@ return {
         automatic_installation = true,
       })
 
+      -- Setup static LSP configurations once (excluding dynamic ones like pylsp)
+      local cmp = require("blink.cmp")
+      for server, config in pairs(opts.servers) do
+        if not config.get_lsp_config then
+          local lsp_config = config.lsp or {}
+          lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
+          vim.lsp.config[server] = lsp_config
+        end
+      end
+
       -- Cache for enabled LSP servers per buffer
       local buffer_lsp_cache = {}
 
@@ -255,18 +288,14 @@ return {
         end
         buffer_lsp_cache[bufnr] = true
 
-        local cmp = require("blink.cmp")
-
         for server, config in pairs(opts.servers) do
           if not config.available or config.available(config, fname) then
-            local lsp_config = config.lsp or {}
-            lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
-
-            -- Set up LSP config if not already set
-            if not vim.lsp.config[server] then
+            -- For servers with dynamic config, generate it now
+            if config.get_lsp_config then
+              local lsp_config = config.get_lsp_config(config, fname)
+              lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
               vim.lsp.config[server] = lsp_config
             end
-
             -- Enable LSP for this buffer
             vim.lsp.enable(server)
           end
