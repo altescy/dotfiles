@@ -10,6 +10,8 @@ return {
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
       vim.keymap.set("n", "<C-k>", builtin.live_grep, { desc = "Telescope live grep" })
+      vim.cmd([[highlight TelescopeBorder guibg=none]])
+      vim.cmd([[highlight TelescopeTitle guibg=none]])
     end,
   },
   {

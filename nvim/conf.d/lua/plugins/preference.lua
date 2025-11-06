@@ -96,7 +96,8 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("bufferline").setup({
+      local bufferline = require("bufferline")
+      bufferline.setup({
         options = {
           number = "ordinal",
           separator_style = "slant",
@@ -177,6 +178,15 @@ return {
           long_message_to_split = true,
           inc_rename = false,
           lsp_doc_border = false,
+        },
+        routes = {
+          {
+            view = "mini",
+            filter = {
+              event = "msg_show",
+              find = "Type .qa",
+            },
+          },
         },
       })
       vim.opt.cmdheight = 0
