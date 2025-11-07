@@ -181,15 +181,18 @@ return {
         },
         routes = {
           {
-            view = "mini",
             filter = {
               event = "msg_show",
               find = "Type .qa",
             },
+            opts = { skip = true },
           },
         },
       })
       vim.opt.cmdheight = 0
+
+      -- Dismiss all notifications instantly
+      vim.keymap.set("n", "<leader>nd", "<cmd>Noice dismiss<CR>", { desc = "Dismiss all notifications" })
     end,
   },
 }
