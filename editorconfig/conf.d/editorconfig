@@ -44,5 +44,8 @@ indent_size = 2
 [*.tsv]
 indent_style = tab
 
+[*.plist]
+indent_style = tab
+
 [Makefile]
 indent_style = tab

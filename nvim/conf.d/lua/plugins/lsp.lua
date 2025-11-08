@@ -79,6 +79,9 @@ return {
     },
     opts = {
       servers = {
+        -- css
+        cssls = {},
+        tailwindcss = {},
         -- docker
         dockerls = {},
         docker_compose_language_service = {},
@@ -236,6 +239,7 @@ return {
         -- text
         vale_ls = {},
         -- typescript
+        biome = {},
         ts_ls = {},
         -- yaml
         yamlls = {},

@@ -19,7 +19,7 @@ fi
 
 if (type "pyenv" > /dev/null 2>&1); then
     # Install latest conda
-    PYTHON_VERSION="3.11.6"
+    PYTHON_VERSION="3.13"
     pyenv install $PYTHON_VERSION
     pyenv rehash
     pyenv global $PYTHON_VERSION
@@ -29,4 +29,4 @@ fi
 python --version
 pip --version
 
-pip install flake8 mypy black isort refurb 'python-lsp-server[mypy,flake8,isort,black]'
+pip install refurb
