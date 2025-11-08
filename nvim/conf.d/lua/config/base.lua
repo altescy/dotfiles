@@ -51,7 +51,7 @@ vim.opt.hlsearch = true
 
 -- KEY MAPPINGS
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap("i", "<C-c>", "<ESC>", { noremap = true })
+vim.keymap.set({ "n", "i", "v" }, "<C-c>", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "kk", "<ESC>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<C-j>", "j", { noremap = true, silent = true })
