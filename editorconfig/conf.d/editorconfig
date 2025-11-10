@@ -20,6 +20,9 @@ indent_size = 2
 [*.{html,xml}]
 indent_size = 2
 
+[*.{css,scss,sass}]
+indent_size = 2
+
 [*.{json,jsonnet,libsonnet,yml,yaml}]
 indent_size = 2
 
@@ -39,6 +42,9 @@ indent_size = 2
 indent_size = 2
 
 [*.tsv]
+indent_style = tab
+
+[*.plist]
 indent_style = tab
 
 [Makefile]

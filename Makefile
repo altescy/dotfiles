@@ -7,9 +7,9 @@ DOCKER_CONTAINER_NAME = dotfiles
 DOCKERFILE_PATH       = $(PWD)/Dockerfile
 
 .PHONY: all brew \
-        apps anyenv_app fzf_app git_app nvim_app poetry_app tmux_app zsh_app efm_app \
+        apps anyenv_app fzf_app git_app nvim_app tmux_app zsh_app efm_app \
         languages clang golang node python rust nim ruby vala zig crystal \
-        configs editorconfig git nvim poetry tmux zsh efm \
+        configs editorconfig git nvim tmux zsh efm \
         docker docker_attach docker_build docker_run docker_stop \
         clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
@@ -35,9 +35,6 @@ git_app:
 
 nvim_app:
 	$(PWD)/nvim/bin/install.sh
-
-poetry_app: python
-	$(PWD)/poetry/bin/install.sh
 
 tmux_app:
 	$(PWD)/tmux/bin/install.sh
@@ -91,7 +88,7 @@ lua:
 #  CONFIGS
 #
 
-configs: git editorconfig nvim poetry tmux zsh
+configs: git editorconfig nvim tmux zsh
 
 editorconfig:
 	$(PWD)/editorconfig/bin/setup.sh
@@ -101,9 +98,6 @@ git: git_app
 
 nvim: node nvim_app
 	$(PWD)/nvim/bin/setup.sh
-
-poetry: poetry_app
-	$(PWD)/poetry/bin/setup.sh
 
 tmux: tmux_app
 	$(PWD)/tmux/bin/setup.sh
