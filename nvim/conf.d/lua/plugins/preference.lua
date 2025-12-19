@@ -2,20 +2,17 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function()
-      local configs = require("nvim-treesitter.configs")
-      configs.setup({
-        ensure_installed = {
-          "lua",
-          "python",
-          "vim",
-          "vimdoc",
-        },
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
+    opts = {
+      ensure_installed = {
+        "lua",
+        "python",
+        "vim",
+        "vimdoc",
+      },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },
+    },
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -73,7 +70,7 @@ return {
           lualine_c = {
             "%=", --[[ add your center compoentnts here in place of this comment ]]
           },
-          lualine_x = {},
+          lualine_x = { "diagnostics" },
           lualine_y = { "filetype", "progress" },
           lualine_z = {
             { "location", separator = { right = "" }, left_padding = 2 },
@@ -95,53 +92,95 @@ return {
   {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      local bufferline = require("bufferline")
-      bufferline.setup({
-        options = {
-          number = "ordinal",
-          separator_style = "slant",
-          diagnostics_indicator = function(_, level)
-            local icon = level:match("error") and " " or ""
-            return " " .. icon
-          end,
+    lazy = false,
+    opts = {
+      options = {
+        number = "ordinal",
+        separator_style = { "", "" },
+        indicator = {
+          style = "none",
+          icon = "",
         },
-      })
-      vim.api.nvim_set_keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true })
-    end,
+      },
+      highlights = {
+        background = { bg = "none" },
+        fill = { bg = "none" },
+        buffer_selected = { bg = "none", fg = "#DCA561" },
+        buffer_visible = { bg = "none", fg = "#839bd3" },
+        close_button = { bg = "none" },
+        close_button_selected = { bg = "none" },
+        close_button_visible = { bg = "none" },
+        duplicate = { bg = "none" },
+        duplicate_selected = { bg = "none" },
+        duplicate_visible = { bg = "none" },
+        error = { bg = "none" },
+        error_selected = { bg = "none" },
+        error_visible = { bg = "none" },
+        hint = { bg = "none" },
+        hint_selected = { bg = "none" },
+        hint_visible = { bg = "none" },
+        indicator_selected = { bg = "none" },
+        indicator_visible = { bg = "none" },
+        info = { bg = "none" },
+        info_selected = { bg = "none" },
+        info_visible = { bg = "none" },
+        modified = { bg = "none" },
+        modified_selected = { bg = "none" },
+        modified_visible = { bg = "none" },
+        numbers = { bg = "none" },
+        numbers_selected = { bg = "none" },
+        numbers_visible = { bg = "none" },
+        offset_separator = { bg = "none" },
+        pick = { bg = "none" },
+        pick_selected = { bg = "none" },
+        pick_visible = { bg = "none" },
+        separator = { bg = "none" },
+        separator_selected = { bg = "none" },
+        separator_visible = { bg = "none" },
+        tab = { bg = "none" },
+        tab_close = { bg = "none" },
+        tab_selected = { bg = "none" },
+        tab_separator = { bg = "none" },
+        tab_separator_selected = { bg = "none" },
+        trunc_marker = { bg = "none" },
+        warning = { bg = "none" },
+        warning_selected = { bg = "none" },
+        warning_visible = { bg = "none" },
+      },
+    },
+    keys = {
+      { "<Tab>", ":BufferLineCycleNext<CR>", noremap = true, desc = "Next buffer" },
+      { "<S-Tab>", ":BufferLineCyclePrev<CR>", noremap = true, desc = "Previous buffer" },
+    },
   },
   {
     "rebelot/kanagawa.nvim",
-    config = function()
+    opts = {
+      background = {
+        dark = "wave",
+        light = "lotus",
+      },
+    },
+    config = function(_, opts)
       vim.cmd("colorscheme kanagawa")
-      require("kanagawa").setup({
-        background = {
-          dark = "wave",
-          light = "lotus",
-        },
-      })
+      require("kanagawa").setup(opts)
     end,
   },
   {
     "petertriho/nvim-scrollbar",
-    config = function()
-      require("scrollbar").setup({})
-    end,
+    opts = {},
   },
   {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("hlchunk").setup({
-        chunk = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-      })
-    end,
+    opts = {
+      chunk = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+    },
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -158,41 +197,37 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            find = "Type .qa",
+          },
+          opts = { skip = true },
+        },
+      },
+    },
+    keys = {
+      { "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "Dismiss all notifications" },
+    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    config = function()
-      require("noice").setup({
-        lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-          },
-        },
-        presets = {
-          bottom_search = true,
-          command_palette = true,
-          long_message_to_split = true,
-          inc_rename = false,
-          lsp_doc_border = false,
-        },
-        routes = {
-          {
-            filter = {
-              event = "msg_show",
-              find = "Type .qa",
-            },
-            opts = { skip = true },
-          },
-        },
-      })
-      vim.opt.cmdheight = 0
-
-      -- Dismiss all notifications instantly
-      vim.keymap.set("n", "<leader>nd", "<cmd>Noice dismiss<CR>", { desc = "Dismiss all notifications" })
-    end,
   },
 }
