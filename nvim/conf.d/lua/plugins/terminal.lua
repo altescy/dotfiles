@@ -6,8 +6,11 @@ return {
       hide_numbers = true,
       start_in_insert = true,
       close_on_exit = true,
-      direction = "horizontal",
+      direction = "float",
       shade_terminals = false,
+      float_opts = {
+        border = "curved",
+      },
     },
     keys = {
       { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
