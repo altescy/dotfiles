@@ -10,11 +10,7 @@
                 "--from",
                 "git+https://github.com/oraios/serena",
                 "serena",
-                "start-mcp-server",
-                "--context",
-                "ide-assistant",
-                "--project",
-                "{cwd}"
+                "start-mcp-server"
             ],
             "environment": {
                 "PYTHONUNBUFFERED": "1"
