@@ -1,20 +1,44 @@
 {
-    "$schema": "https://opencode.ai/config.json",
-    "theme": "kanagawa",
-    "mcp": {
-        "serena": {
-            "type": "local",
-            "enabled": true,
-            "command": [
-                "uvx",
-                "--from",
-                "git+https://github.com/oraios/serena",
-                "serena",
-                "start-mcp-server"
-            ],
-            "environment": {
-                "PYTHONUNBUFFERED": "1"
-            }
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "kanagawa",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen3-coder:latest": {
+          "name": "qwen3-coder:latest",
+          "tool_call": true
+        },
+        "gpt-oss:latest": {
+          "name": "gpt-oss:latest",
+          "tool_call": true,
+          "reasoning": true
         }
+      }
     }
+  },
+  "mcp": {
+    "serena": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant",
+        "--project",
+        "{cwd}"
+      ],
+      "environment": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
 }
