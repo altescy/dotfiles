@@ -23,7 +23,7 @@ indent_size = 2
 [*.{css,scss,sass}]
 indent_size = 2
 
-[*.{json,jsonnet,libsonnet,yml,yaml}]
+[*.{json,json5,jsonc,jsonnet,libsonnet,yml,yaml}]
 indent_size = 2
 
 [*.{rb,cr}]
