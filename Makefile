@@ -9,7 +9,7 @@ DOCKERFILE_PATH       = $(PWD)/Dockerfile
 .PHONY: all brew \
         apps anyenv_app fzf_app git_app nvim_app tmux_app zsh_app efm_app \
         languages clang golang node python rust nim ruby vala zig crystal \
-        configs editorconfig git nvim tmux zsh efm \
+        configs editorconfig git nvim tmux zsh efm ghostty \
         docker docker_attach docker_build docker_run docker_stop \
         clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
@@ -108,6 +108,9 @@ zsh: zsh_app
 efm: efm_app
 	$(PWD)/efm/bin/setup.sh
 
+ghostty:
+	$(PWD)/ghostty/bin/setup.sh
+
 #
 #  DOCKER
 #
@@ -143,7 +146,6 @@ git_clean:
 
 nvim_clean:
 	rm -rf $(HOME)/.config/nvim
-	rm -rf $(HOME)/.config/coc
 	rm -rf $(HOME)/.cache/nvim
 	rm -rf $(HOME)/.cache/dein
 

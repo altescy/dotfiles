@@ -1,20 +1,19 @@
-shell-integration = zsh
-
-window-padding-x = 8
-window-padding-y = 8
-window-padding-balance = true
-
-background-opacity = 0.82
-background-blur = true
-
 link-url = true
-
+shell-integration = zsh
+scrollback-limit = 512000000
+window-decoration = true
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+window-padding-color = extend
+background-opacity = 0.8
+background-blur = true
 resize-overlay = never
 
-font-family = "Hack Nerd Font Mono"
-font-feature = -dlig
-
-# Kanagawa Theme
+##
+## Kanagawa Theme
+##  https://github.com/rebelot/kanagawa.nvim/blob/master/extras/ghostty/kanagawa-wave
+##
 palette = 0=#16161d
 palette = 1=#c34043
 palette = 2=#76946a
@@ -38,4 +37,14 @@ cursor-color = c8c093
 selection-background = 2d4f67
 selection-foreground = c8c093
 
-scrollback-limit = 512000000
+##
+## Fonts
+##
+font-feature = -dlig
+font-family = "Hack Nerd Font Mono"
+
+##
+## MacOS
+##
+macos-titlebar-style = hidden
+macos-titlebar-proxy-icon = hidden
