@@ -49,3 +49,6 @@ indent_style = tab
 
 [Makefile]
 indent_style = tab
+
+[*.{c,cpp,h,hpp}]
+indent_size = 2

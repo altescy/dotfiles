@@ -7,6 +7,11 @@ return {
   {
     "stevearc/overseer.nvim",
     lazy = true,
+    opts = {
+      task_list = {
+        direction = "bottom",
+      },
+    },
     keys = {
       { "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Toggle Overseer" },
       { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run Task" },
