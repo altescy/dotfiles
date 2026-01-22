@@ -21,9 +21,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      vim.set_highlight(0, "SidekickChat", { bg = none })
-    end,
     keys = {
       {
         "<c-.>",
