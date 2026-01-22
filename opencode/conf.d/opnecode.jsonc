@@ -1,0 +1,24 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "kanagawa",
+    "mcp": {
+        "serena": {
+            "type": "local",
+            "enabled": true,
+            "command": [
+                "uvx",
+                "--from",
+                "git+https://github.com/oraios/serena",
+                "serena",
+                "start-mcp-server",
+                "--context",
+                "ide-assistant",
+                "--project",
+                "{cwd}"
+            ],
+            "environment": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        }
+    }
+}

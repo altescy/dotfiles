@@ -9,7 +9,7 @@ DOCKERFILE_PATH       = $(PWD)/Dockerfile
 .PHONY: all brew \
         apps anyenv_app fzf_app git_app nvim_app tmux_app zsh_app efm_app \
         languages clang golang node python rust nim ruby vala zig crystal \
-        configs editorconfig git nvim tmux zsh efm ghostty \
+        configs editorconfig git nvim tmux zsh efm ghostty opencode serena \
         docker docker_attach docker_build docker_run docker_stop \
         clean editorconfig_clean git_clean nvim_clean tmux_clean zsh_clean
 
@@ -110,6 +110,12 @@ efm: efm_app
 
 ghostty:
 	$(PWD)/ghostty/bin/setup.sh
+
+opencode:
+	$(PWD)/opencode/bin/setup.sh
+
+serena:
+	$(PWD)/serena/bin/setup.sh
 
 #
 #  DOCKER
