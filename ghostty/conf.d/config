@@ -42,6 +42,7 @@ selection-foreground = c8c093
 ##
 font-feature = -dlig
 font-family = "Hack Nerd Font Mono"
+font-family = "Cica"
 
 ##
 ## MacOS
