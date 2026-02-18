@@ -5,7 +5,13 @@ return {
     lazy = true,
     branch = "0.1.x",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {},
+    opts = {
+      defaults = {
+        preview = {
+          treesitter = false,
+        },
+      },
+    },
     keys = {
       { "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
       { "<C-k>", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep" },

@@ -2,17 +2,35 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = {
-        "lua",
-        "python",
-        "vim",
-        "vimdoc",
-      },
-      sync_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    config = function(_, opts)
+      local ok_config, ts_config = pcall(require, "nvim-treesitter.config")
+      if ok_config and ts_config and ts_config.setup then
+        ts_config.setup({
+          ensure_installed = {
+            "lua",
+            "python",
+            "vim",
+            "vimdoc",
+          },
+          sync_install = false,
+          highlight = { enable = true },
+          indent = { enable = true },
+        })
+      end
+
+      local ok_parsers, ts_parsers = pcall(require, "nvim-treesitter.parsers")
+      if ok_parsers
+        and ts_parsers
+        and not ts_parsers.ft_to_lang
+        and vim.treesitter
+        and vim.treesitter.language
+        and vim.treesitter.language.get_lang
+      then
+        ts_parsers.ft_to_lang = function(ft)
+          return vim.treesitter.language.get_lang(ft)
+        end
+      end
+    end,
   },
   {
     "nvim-lualine/lualine.nvim",
