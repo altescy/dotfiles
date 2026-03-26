@@ -1,6 +1,14 @@
 -- Project configuration cache
 local project_config_cache = {}
 
+-- Cache for enabled LSP servers per buffer
+local buffer_lsp_cache = {}
+
+-- Get project-local LSP configuration from vim.g.lsp_config (.nvim.lua)
+local function get_project_local_config()
+  return vim.g.lsp_config or {}
+end
+
 -- Get project configuration with caching
 local function get_project_config(root_dir)
   if project_config_cache[root_dir] then
@@ -92,9 +100,10 @@ return {
         -- lua
         lua_ls = {
           lsp = {
-            root_dir = function(fname)
+            root_dir = function(bufnr)
+              local fname = type(bufnr) == "number" and vim.api.nvim_buf_get_name(bufnr) or bufnr
               local util = require("lspconfig.util")
-              return util.root_pattern(".git", "stylua.toml", ".stylua.toml")(fname) or util.path.dirname(fname)
+              return util.root_pattern(".git", "stylua.toml", ".stylua.toml")(fname) or vim.fs.dirname(fname)
             end,
             settings = {
               Lua = {
@@ -150,6 +159,11 @@ return {
             isort = "python-lsp-isort",
           },
           available = function(config, fname)
+            local bufnr = vim.fn.bufnr(fname)
+            if bufnr ~= -1 and vim.bo[bufnr].filetype ~= "python" then
+              return false
+            end
+
             local root = get_python_root(fname)
             if not root then
               return false
@@ -157,8 +171,8 @@ return {
 
             local proj_config = get_project_config(root)
 
-            -- Don't use pylsp if pyright or ruff is used
-            if proj_config.has_pyright or proj_config.has_ruff then
+            -- Don't use pylsp if pyright is used
+            if proj_config.has_pyright then
               return false
             end
 
@@ -206,30 +220,61 @@ return {
             local proj_config = get_project_config(root)
             local util = require("lspconfig.util")
 
-            return {
-              root_dir = function(fname)
-                return util.root_pattern(
-                  "pyproject.toml",
-                  "setup.py",
-                  "setup.cfg",
-                  "Pipfile",
-                  "requirements.txt",
-                  ".venv"
-                )(fname) or util.path.dirname(fname)
-              end,
-              settings = {
-                pylsp = {
-                  plugins = {
-                    pycodestyle = { enabled = true },
-                    pylint = { enabled = proj_config.has_pylint },
-                    flake8 = { enabled = false },
-                    mypy = { enabled = proj_config.has_mypy },
-                    black = { enabled = proj_config.has_black },
-                    isort = { enabled = proj_config.has_isort },
-                  },
+            local pylsp_cmd = nil
+            local venv_dir = root .. "/.venv"
+            if vim.fn.isdirectory(venv_dir) == 1 then
+              local direct = venv_dir .. "/bin/pylsp"
+              if vim.fn.executable(direct) == 1 then
+                pylsp_cmd = { direct }
+              else
+                local venv_entries = vim.fn.glob(venv_dir .. "/*/bin/pylsp", false, true)
+                if #venv_entries > 0 then
+                  pylsp_cmd = { venv_entries[1] }
+                end
+              end
+            end
+
+            local pylsp_mypy_cfg = { enabled = proj_config.has_mypy, live_mode = false }
+            local venv_mypy = root .. "/.venv/bin/mypy"
+            local venv_python = root .. "/.venv/bin/python"
+            if vim.fn.executable(venv_mypy) == 1 then
+              pylsp_mypy_cfg.overrides = { "--python-executable", venv_python, true }
+              pylsp_mypy_cfg.mypy_command = { venv_mypy }
+            end
+
+            local pylsp_settings = {
+              pylsp = {
+                plugins = {
+                  pycodestyle = { enabled = true },
+                  pylint = { enabled = proj_config.has_pylint },
+                  flake8 = { enabled = false },
+                  pylsp_mypy = pylsp_mypy_cfg,
+                  black = { enabled = proj_config.has_black },
+                  isort = { enabled = proj_config.has_isort },
                 },
               },
             }
+
+            local lsp_config = {
+              filetypes = { "python" },
+              root_dir = util.root_pattern(
+                "pyproject.toml",
+                "setup.py",
+                "setup.cfg",
+                "Pipfile",
+                "requirements.txt",
+                ".venv"
+              )(fname) or vim.fs.dirname(fname),
+              settings = pylsp_settings,
+              on_init = function(client)
+                client.notify("workspace/didChangeConfiguration", { settings = pylsp_settings })
+              end,
+            }
+            lsp_config.cmd = pylsp_cmd or { "pylsp" }
+            if vim.fn.executable(venv_mypy) == 1 then
+              lsp_config.cmd_env = { PYLSP_MYPY_ALLOW_DANGEROUS_CODE_EXECUTION = "1" }
+            end
+            return lsp_config
           end,
         },
         -- rust
@@ -264,20 +309,20 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({
         automatic_installation = true,
+        automatic_enable = { exclude = { "pylsp" } },
       })
 
       -- Setup static LSP configurations once (excluding dynamic ones like pylsp)
       local cmp = require("blink.cmp")
+      local local_cfg = get_project_local_config()
+      local overrides = local_cfg.override or {}
       for server, config in pairs(opts.servers) do
         if not config.get_lsp_config then
-          local lsp_config = config.lsp or {}
+          local lsp_config = vim.tbl_deep_extend("force", config.lsp or {}, overrides[server] or {})
           lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
           vim.lsp.config[server] = lsp_config
         end
       end
-
-      -- Cache for enabled LSP servers per buffer
-      local buffer_lsp_cache = {}
 
       -- Setup LSP for each buffer
       local function setup_lsp_for_buffer(bufnr)
@@ -292,16 +337,38 @@ return {
         end
         buffer_lsp_cache[bufnr] = true
 
+        local local_cfg = get_project_local_config()
+        local disabled = local_cfg.disable or {}
+        local overrides = local_cfg.override or {}
+
         for server, config in pairs(opts.servers) do
-          if not config.available or config.available(config, fname) then
-            -- For servers with dynamic config, generate it now
+          local force_enabled = overrides[server] and overrides[server].force_enable
+          if vim.tbl_contains(disabled, server) then
+            -- skip: disabled by project-local config
+          elseif force_enabled or not config.available or config.available(config, fname) then
             if config.get_lsp_config then
               local lsp_config = config.get_lsp_config(config, fname)
+              local server_overrides = vim.deepcopy(overrides[server] or {})
+              server_overrides.force_enable = nil
+              lsp_config = vim.tbl_deep_extend("force", lsp_config, server_overrides)
+              if lsp_config.settings then
+                lsp_config.on_init = function(client)
+                  client.notify("workspace/didChangeConfiguration", { settings = lsp_config.settings })
+                end
+              end
               lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
-              vim.lsp.config[server] = lsp_config
+              lsp_config.name = server
+              vim.lsp.start(lsp_config, { bufnr = bufnr })
+            else
+              if overrides[server] then
+                local server_overrides = vim.deepcopy(overrides[server])
+                server_overrides.force_enable = nil
+                local lsp_config = vim.tbl_deep_extend("force", vim.lsp.config[server] or {}, server_overrides)
+                lsp_config.capabilities = cmp.get_lsp_capabilities(lsp_config.capabilities)
+                vim.lsp.config[server] = lsp_config
+              end
+              vim.lsp.enable(server)
             end
-            -- Enable LSP for this buffer
-            vim.lsp.enable(server)
           end
         end
       end
@@ -343,14 +410,41 @@ return {
         end,
       })
 
+      -- Clear all caches when .nvim.lua is modified (project-local LSP config may have changed)
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = { ".nvim.lua" },
+        callback = function()
+          project_config_cache = {}
+          buffer_lsp_cache = {}
+
+          if vim.g.lsp_debug then
+            vim.notify("Cleared all LSP caches (.nvim.lua modified)", vim.log.levels.INFO)
+          end
+
+          vim.schedule(function()
+            for _, client in ipairs(vim.lsp.get_clients()) do
+              local buffers = vim.lsp.get_buffers_by_client_id(client.id)
+              client.stop()
+              for _, bufnr in ipairs(buffers) do
+                setup_lsp_for_buffer(bufnr)
+              end
+            end
+          end)
+        end,
+      })
+
       -- LspAttach autocmd for dynamic control
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(ev)
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           local config = opts.servers[client.name]
+          local local_cfg = get_project_local_config()
+          local overrides = local_cfg.override or {}
+          local force_enabled = overrides[client.name] and overrides[client.name].force_enable
           if
             client
             and config
+            and not force_enabled
             and config.available
             and not config.available(config, vim.api.nvim_buf_get_name(ev.buf))
           then
