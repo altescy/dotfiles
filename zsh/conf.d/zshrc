@@ -11,7 +11,7 @@ setopt EXTENDED_HISTORY
 
 ### zsh completion
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
 	compinit;
 else
 	compinit -C;
@@ -97,7 +97,11 @@ fi
 
 ### starship
 if is_exists starship; then
-    eval "$(starship init zsh)"
+    if ! [ -f ~/.cache/starship.cache ]; then
+        starship init zsh > ~/.cache/starship.cache
+        zcompile ~/.cache/starship.cache
+    fi
+    source ~/.cache/starship.cache
 fi
 
 ### git
@@ -116,11 +120,21 @@ if is_exists anyenv; then
       zcompile ~/.cache/anyenv.cache
    fi
    source ~/.cache/anyenv.cache
+elif is_exists rbenv; then
+    if ! [ -f ~/.cache/rbenv.cache ]; then
+        rbenv init - > ~/.cache/rbenv.cache
+        zcompile ~/.cache/rbenv.cache
+    fi
+    source ~/.cache/rbenv.cache
 fi
 
 ### direnv
 if is_exists direnv; then
-    eval "$(direnv hook zsh)"
+    if ! [ -f ~/.cache/direnv.cache ]; then
+        direnv hook zsh > ~/.cache/direnv.cache
+        zcompile ~/.cache/direnv.cache
+    fi
+    source ~/.cache/direnv.cache
 fi
 
 ### rustup
@@ -137,6 +151,13 @@ fi
 ### fzf
 if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
+    export FZF_DEFAULT_OPTS='--height 50% --reverse --border'
+elif is_exists fzf; then
+    if ! [ -f ~/.cache/fzf.cache ]; then
+        fzf --zsh > ~/.cache/fzf.cache
+        zcompile ~/.cache/fzf.cache
+    fi
+    source ~/.cache/fzf.cache
     export FZF_DEFAULT_OPTS='--height 50% --reverse --border'
 fi
 
@@ -191,4 +212,13 @@ if [ -d ${HOME}/.nvm ]; then
       export NODE_PATH="${NVM_DIR}/versions/node/v${DEFAULT_NODE_VERSION}/lib/node_modules"
     fi
   fi
+fi
+
+### uv
+if is_exists uv; then
+    if ! [ -f ~/.cache/uv-completion.zsh ]; then
+        uv generate-shell-completion zsh > ~/.cache/uv-completion.zsh
+        zcompile ~/.cache/uv-completion.zsh
+    fi
+    source ~/.cache/uv-completion.zsh
 fi
