@@ -113,13 +113,11 @@ fi
 ### anyenv
 if is_exists anyenv; then
     export PATH="$HOME/.anyenv/bin:$PATH"
-    # eval "$(anyenv init --no-rehash - zsh)"
-   if ! [ -f ~/.cache/anyenv.cache ]
-   then
-      anyenv init - --no-rehash > ~/.cache/anyenv.cache
-      zcompile ~/.cache/anyenv.cache
-   fi
-   source ~/.cache/anyenv.cache
+    if ! [ -f ~/.cache/anyenv.cache ] || grep -Eq 'anyenv\.bash|NODENV_SHELL=bash|nodenv\.bash' ~/.cache/anyenv.cache; then
+        SHELL="$(command -v zsh)" anyenv init - --no-rehash > ~/.cache/anyenv.cache
+        zcompile ~/.cache/anyenv.cache
+    fi
+    source ~/.cache/anyenv.cache
 elif is_exists rbenv; then
     if ! [ -f ~/.cache/rbenv.cache ]; then
         rbenv init - > ~/.cache/rbenv.cache
